@@ -1,0 +1,9 @@
+{
+  "urlSiteMirroir_commentaire": "Mirror site's url",
+  "urlSiteMirroir": "http://localhost:3000/",
+  "urlBackEnd_commentaire": "datacollection management Coleman Bo api url",
+  "urlBackEnd": "http://localhost:8082/",
+  "urlColemanPromotion_commentaire": "coleman's access url",
+  "urlColemanPromotion": "https://localhost:3000",
+  "authType": "anonymous"
+}

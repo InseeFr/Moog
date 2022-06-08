@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: moog
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: moog
+  template:
+    metadata:
+      labels:
+        app: moog
+    spec:
+      containers:
+        - name: moog
+          image: inseefr/moog:0.1.0
