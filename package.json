@@ -1,0 +1,65 @@
+{
+  "name": "front-moog",
+  "version": "2.0.2",
+  "private": true,
+  "dependencies": {
+    "@vtex/react-csv-parse": "^3.0.2",
+    "axios": "^0.18.1",
+    "babel-polyfill": "^6.23.0",
+    "file-saver": "^2.0.5",
+    "json2csv": "^5.0.5",
+    "keycloak-js": "^18.0.0",
+    "papaparse": "^4.6.2",
+    "prop-types": "^15.7.2",
+    "react": "^16.14.0",
+    "react-csv": "^1.1.2",
+    "react-csv-reader": "^1.3.1",
+    "react-dom": "^16.14.0",
+    "react-js-pagination": "^3.0.2",
+    "react-loading": "^2.0.3",
+    "react-redux": "^6.0.1",
+    "react-responsive-modal": "^3.5.1",
+    "react-router": "^3.2.6",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "2.0.5",
+    "redux": "^4.0.5",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0",
+    "tachyons-components": "^1.0.1"
+  },
+  "scripts": {
+    "start": "cross-env NODE_PATH=src/ react-scripts start ",
+    "build": "cross-env NODE_PATH=src/ react-scripts build",
+    "test": "cross-env NODE_PATH=src/ react-scripts test",
+    "eject": "react-scripts eject",
+    "build-innovation": "npm run build && copy-and-watch configuration/innovation/*.json build",
+    "build-dv": "npm run build && copy-and-watch configuration/dv/*.json build && npm run create-zip",
+    "build-qf": "npm run build && copy-and-watch configuration/qf/*.json build && npm run create-zip",
+    "build-prod": "npm run build && copy-and-watch configuration/prod/*.json build && npm run create-zip",
+    "deploy-dv": "npm run build-dv && node deploy/deploy-dv",
+    "deploy-qf": "npm run build-qf && node deploy/deploy-qf",
+    "create-zip": "cd build && bestzip ../moog-front-%npm_package_version%.zip *"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "bestzip": "^2.1.7",
+    "copy-and-watch": "^0.1.5",
+    "cross-env": "^5.2.1",
+    "eslint-config-airbnb": "^17.1.1",
+    "eslint-config-prettier": "^3.6.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.21.5",
+    "ftp-deploy": "^2.3.8",
+    "prettier": "^1.19.1"
+  }
+}
