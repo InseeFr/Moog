@@ -32,12 +32,6 @@
     "build": "cross-env NODE_PATH=src/ react-scripts build",
     "test": "cross-env NODE_PATH=src/ react-scripts test",
     "eject": "react-scripts eject",
-    "build-innovation": "npm run build && copy-and-watch configuration/innovation/*.json build",
-    "build-dv": "npm run build && copy-and-watch configuration/dv/*.json build && npm run create-zip",
-    "build-qf": "npm run build && copy-and-watch configuration/qf/*.json build && npm run create-zip",
-    "build-prod": "npm run build && copy-and-watch configuration/prod/*.json build && npm run create-zip",
-    "deploy-dv": "npm run build-dv && node deploy/deploy-dv",
-    "deploy-qf": "npm run build-qf && node deploy/deploy-qf",
     "create-zip": "cd build && bestzip ../moog-front-%npm_package_version%.zip *"
   },
   "eslintConfig": {
