@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
         - name: moog
-          image: inseefr/moog:0.1.0
+          image: inseefr/moog:2.0.3
