@@ -7,9 +7,9 @@ metadata:
 spec:
   tls:
     - hosts:
-        - moog.dev.insee.io
+        - suivi-gestion-collecte-enquetes.dev.insee.io
   rules:
-    - host: moog.dev.insee.io
+    - host: suivi-gestion-collecte-enquetes.dev.insee.io
       http:
         paths:
           - path: /
