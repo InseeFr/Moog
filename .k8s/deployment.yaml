@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: moog
-          image: inseefr/moog:2.0.5
+          image: inseefr/moog:2.0.6
           env:
             - name: DATACOLLECTION_MANAGEMENT_API
               value: "https://datacollection-management-api.dev.insee.io/moog"
