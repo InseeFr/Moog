@@ -1,8 +1,8 @@
 {
-  "realm": "insee-realm",
-  "auth-server-url": "http://localhost:8180/auth",
+  "realm": "${KC_REALM}",
+  "auth-server-url": "${KC_URL}",
   "ssl-required": "external",
-  "resource": "moog-frontend",
+  "resource": "${KC_CLIENT}",
   "public-client": true,
   "confidential-port": 0
 }
