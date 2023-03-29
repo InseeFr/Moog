@@ -1,10 +1,10 @@
-import Papa from 'papaparse';
-import React, { Component } from 'react';
-import Modal from 'react-responsive-modal';
-import myAxios from 'utils/api-call';
-import Loader from 'utils/loader';
-import MapObjects from '../utils/jsonUtils';
-import '../../index.css';
+import Papa from "papaparse";
+import React, { Component } from "react";
+import Modal from "react-responsive-modal";
+import myAxios from "utils/api-call";
+import Loader from "utils/loader";
+import MapObjects from "../utils/jsonUtils";
+import "../../index.css";
 import {
   idContact,
   idUe,
@@ -16,14 +16,14 @@ import {
   pathTransmissionCampagne,
   reponseAttenduDansCSV,
   statut,
-} from '../../utils/properties';
-import Bilan from './bilan';
+} from "../../utils/properties";
+import Bilan from "./bilan";
 
 export default class Maj extends Component {
   static csvJSON(csv) {
     let newCsv = csv;
-    newCsv = newCsv.replace('idue', 'idUe');
-    newCsv = newCsv.replace('idcontact', 'idContact');
+    newCsv = newCsv.replace("idue", "idUe");
+    newCsv = newCsv.replace("idcontact", "idContact");
     return Papa.parse(newCsv, { header: true, skipEmptyLines: true });
   }
 
@@ -31,25 +31,49 @@ export default class Maj extends Component {
     const dataJson = Maj.csvJSON(data);
 
     const erreurEnteteColonnes =
-      dataJson.meta.fields.filter(element => !libellesAutorises.includes(element)).length > 0;
+      dataJson.meta.fields.filter(
+        (element) => !libellesAutorises.includes(element)
+      ).length > 0;
 
     const erreurNombreChamps = !nbChamps.includes(dataJson.meta.fields.length);
     // verif nb de colonnes + nom des colonnes
     if (erreurNombreChamps || erreurEnteteColonnes) return false;
 
     // verif statuts autorisés + longueur de l'identifiant (idContact -> longueurIdContact / idue --> non vide donc longeur >=1)
-    if (dataJson.meta.fields.includes(idContact) && !dataJson.meta.fields.includes(idUe)) {
+    if (
+      dataJson.meta.fields.includes(idContact) &&
+      !dataJson.meta.fields.includes(idUe)
+    ) {
       return (
         dataJson.data.filter(
-          item =>
-            item[idContact].length !== longueurIdContact || !(item[statut] in reponseAttenduDansCSV)
+          (item) =>
+            item[idContact].length !== longueurIdContact ||
+            !(item[statut] in reponseAttenduDansCSV)
         ).length === 0
       );
     }
-    if (dataJson.meta.fields.includes(idUe) && !dataJson.meta.fields.includes(idContact)) {
+    if (
+      dataJson.meta.fields.includes(idUe) &&
+      !dataJson.meta.fields.includes(idContact)
+    ) {
       return (
         dataJson.data.filter(
-          item => item[idUe].length < longueurMinIdUe || !(item[statut] in reponseAttenduDansCSV)
+          (item) =>
+            item[idUe].length < longueurMinIdUe ||
+            !(item[statut] in reponseAttenduDansCSV)
+        ).length === 0
+      );
+    }
+    if (
+      dataJson.meta.fields.includes(idUe) &&
+      dataJson.meta.fields.includes(idContact)
+    ) {
+      return (
+        dataJson.data.filter(
+          (item) =>
+            item[idUe].length < longueurMinIdUe ||
+            item[idContact].length !== longueurIdContact ||
+            !(item[statut] in reponseAttenduDansCSV)
         ).length === 0
       );
     }
@@ -76,7 +100,10 @@ export default class Maj extends Component {
       this.setState({ file: content });
 
       if (Maj.validFileContent(this.state.file)) {
-        this.setState({ isVerifOk: true, jsonContent: Maj.csvJSON(this.state.file).data });
+        this.setState({
+          isVerifOk: true,
+          jsonContent: Maj.csvJSON(this.state.file).data,
+        });
       } else {
         this.setState({
           file: null,
@@ -87,7 +114,7 @@ export default class Maj extends Component {
       }
     };
 
-    this.handleChange = file => {
+    this.handleChange = (file) => {
       this.setState({ displayBilan: false, displayErrorMessage: false });
       reader = new FileReader();
       reader.onloadend = this.handleFileRead;
@@ -101,12 +128,15 @@ export default class Maj extends Component {
       console.log(jsonContent);
       myAxios()
         .post(pathTransmissionCampagne + id + pathEnregistrerInfoSuiviGestion, {
-          data: MapObjects(jsonContent,'uploadEN'),
+          data: MapObjects(jsonContent, "uploadEN"),
         })
-        .then(response => {
+        .then((response) => {
           this.setState({
             isLoading: false,
-            dataBilan: { ok: response.data.OK.length, listError: response.data.KO },
+            dataBilan: {
+              ok: response.data.OK.length,
+              listError: response.data.KO,
+            },
             displayBilan: true,
           });
         })
@@ -140,9 +170,9 @@ export default class Maj extends Component {
   validDate() {
     const { dateDebut, dateFin } = this.props;
     const now = new Date().getTime();
-    if (now < dateDebut) return 'NOT_STARTED';
-    if (dateFin < now) return 'FINISHED';
-    return 'OPEN';
+    if (now < dateDebut) return "NOT_STARTED";
+    if (dateFin < now) return "FINISHED";
+    return "OPEN";
   }
 
   render() {
@@ -158,35 +188,37 @@ export default class Maj extends Component {
     const { label } = this.props;
     return (
       <div className="container">
-        {this.validDate() === 'OPEN' && (
+        {this.validDate() === "OPEN" && (
           <input
             type="file"
             id="file"
             className="form-control-file"
             accept=".csv"
-            onInput={e => this.handleChange(e.target.files[0])}
-            onClick={event => {
+            onInput={(e) => this.handleChange(e.target.files[0])}
+            onClick={(event) => {
               event.target.value = null;
             }}
           />
         )}
-        {this.validDate() === 'NOT_STARTED' && (
+        {this.validDate() === "NOT_STARTED" && (
           <div>
-            <h2 style={{ color: 'red' }}>
-              L'enquête n'a pas démarré. Il est impossible d'enregistrer des évènements.
+            <h2 style={{ color: "red" }}>
+              L'enquête n'a pas démarré. Il est impossible d'enregistrer des
+              évènements.
             </h2>
           </div>
         )}
-        {this.validDate() === 'FINISHED' && (
+        {this.validDate() === "FINISHED" && (
           <div>
-            <h2 style={{ color: 'red' }}>
-              L'enquête est terminée. Il est impossible d'enregistrer des évènements.
+            <h2 style={{ color: "red" }}>
+              L'enquête est terminée. Il est impossible d'enregistrer des
+              évènements.
             </h2>
           </div>
         )}
         {isVerifOk && (
           <div>
-            <h2 style={{ color: 'green' }}>Format de fichier correct</h2>
+            <h2 style={{ color: "green" }}>Format de fichier correct</h2>
             <button type="button" onClick={() => this.onOpenModalValidation()}>
               Enregistrer
             </button>
@@ -194,12 +226,12 @@ export default class Maj extends Component {
         )}
         {!isVerifOk && isMauvaisFormatAffiche && (
           <div>
-            <h2 style={{ color: 'red' }}>Mauvais format de fichier</h2>
+            <h2 style={{ color: "red" }}>Mauvais format de fichier</h2>
           </div>
         )}
         {isLoading && <Loader text="L'envoi des données est en cours." />}
         {displayErrorMessage && (
-          <h2 style={{ color: 'red' }}>Erreur lors de l'envoi des données</h2>
+          <h2 style={{ color: "red" }}>Erreur lors de l'envoi des données</h2>
         )}
         {displayBilan && <Bilan data={dataBilan} />}
         <Modal

@@ -1,4 +1,4 @@
-import { GESTIONNAIRE_ROLE, ASSISTANCE_ROLE } from './properties';
+import { GESTIONNAIRE_ROLE, ASSISTANCE_ROLE } from "./properties";
 
 export default function estGestionnaire(roles) {
   const test = Array.isArray(roles) && roles.includes(GESTIONNAIRE_ROLE);
