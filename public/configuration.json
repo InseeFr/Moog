@@ -5,6 +5,9 @@
   "urlBackEnd": "${DATACOLLECTION_MANAGEMENT_API}",
   "urlColemanPromotion_commentaire": "coleman's access url",
   "urlColemanPromotion": "${ACCESS_URL}",
+  "roleAdministrateur": "${ROLE_ADMINISTRATEUR}",
+  "roleGestionnaire": "${ROLE_GESTIONNAIRE}",
+  "roleAssistance": "${ROLE_ASSISTANCE}",
   "authType": "${AUTHENTICATION_MODE}",
   "identityProvider": "${IDENTITY_PROVIDER}"
 }

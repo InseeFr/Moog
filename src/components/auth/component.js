@@ -16,6 +16,9 @@ const Auth = ({
   saveUrlColemanPromotion,
   saveUrlBackEnd,
   saveUrlSiteMirroir,
+  saveRoleAdministrateur,
+  saveRoleGestionnaire,
+  saveRoleAssistance,
 }) => {
   const [authType, setAuthType] = useState(null);
   const [token, setToken] = useState(null);
@@ -31,6 +34,9 @@ const Auth = ({
           saveUrlBackEnd(data.urlBackEnd);
           saveUrlSiteMirroir(data.urlSiteMirroir);
           saveUrlColemanPromotion(data.urlColemanPromotion);
+          saveRoleAdministrateur(data.roleAdministrateur);
+          saveRoleGestionnaire(data.roleGestionnaire);
+          saveRoleAssistance(data.roleAssistance);
           setAuthType(data.authType);
           setIdentityProvider(data.identityProvider);
         });
