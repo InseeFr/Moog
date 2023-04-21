@@ -24,7 +24,11 @@ export default class Maj extends Component {
     let newCsv = csv;
     newCsv = newCsv.replace("idue", "idUe");
     newCsv = newCsv.replace("idcontact", "idContact");
-    return Papa.parse(newCsv, { header: true, skipEmptyLines: true });
+    return Papa.parse(newCsv, {
+      header: true,
+      skipEmptyLines: true,
+      transform: (cell) => cell.trim(),
+    });
   }
 
   static validFileContent(data) {

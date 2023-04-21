@@ -6,8 +6,8 @@
   "urlColemanPromotion_commentaire": "coleman's access url",
   "urlColemanPromotion": "https://enquetes.developpement.insee.fr",
   "roleAdministrateur": "utilisateur_Platine",
-  "roleGestionnaire": "utilisateur_Platine",
-  "roleAssistance": "administrateur_Platine",
+  "roleGestionnaire": "utilisateur_Platine,administrateur_Platine",
+  "roleAssistance": "utilisateur_Platine",
   "authType": "keycloak",
   "identityProvider": "insee-ssp"
 }
