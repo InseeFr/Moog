@@ -1,8 +1,8 @@
 {
-  "realm": "questionnaire-particuliers",
-  "auth-server-url": "https://auth.insee.test/auth",
-  "ssl-required": "none",
-  "resource": "coleman-moog",
+  "realm": "${KC_REALM}",
+  "auth-server-url": "${KC_URL}",
+  "ssl-required": "external",
+  "resource": "${KC_CLIENT}",
   "public-client": true,
   "confidential-port": 0
 }
