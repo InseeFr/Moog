@@ -1,10 +1,13 @@
 {
   "urlSiteMirroir_commentaire": "Mirror site's url",
-  "urlSiteMirroir": "${MIRROR_URL}",
+  "urlSiteMirroir": "https://questionnaire-enquetes.developpement.insee.fr",
   "urlBackEnd_commentaire": "datacollection management Coleman Bo api url",
-  "urlBackEnd": "${DATACOLLECTION_MANAGEMENT_API}",
+  "urlBackEnd": "https://api-pilotage-enquetes.developpement.insee.fr/api/moog",
   "urlColemanPromotion_commentaire": "coleman's access url",
-  "urlColemanPromotion": "${ACCESS_URL}",
-  "authType": "${AUTHENTICATION_MODE}",
-  "identityProvider": "${IDENTITY_PROVIDER}"
+  "urlColemanPromotion": "https://enquetes.developpement.insee.fr",
+  "roleAdministrateur": "utilisateur_Platine",
+  "roleGestionnaire": "utilisateur_Platine",
+  "roleAssistance": "administrateur_Platine",
+  "authType": "keycloak",
+  "identityProvider": "insee-ssp"
 }
