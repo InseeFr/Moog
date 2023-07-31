@@ -1,12 +1,13 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import estGestionnaire from 'utils/roles';
+import PropTypes from "prop-types";
+import React from "react";
+import estGestionnaire from "utils/roles";
 
 export default function Ue(props) {
   const {
     idContact,
     idUe,
     campagne,
+    source,
     Nom,
     Prenom,
     Lien,
@@ -17,7 +18,7 @@ export default function Ue(props) {
   } = props;
   const isGestionnaire = estGestionnaire(roles);
   return (
-    <tr id={idUe + '-' + campagne.idCampagne}>
+    <tr id={idUe + "-" + campagne.idCampagne}>
       <td>{idContact}</td>
       {isGestionnaire && <td>{idUe}</td>}
       <td>{adresse}</td>
@@ -43,7 +44,7 @@ export default function Ue(props) {
           type="button"
           className="btn btn-secondary btn-sm glyphicon glyphicon-envelope"
           title="Mail"
-          onClick={() => AppelMail({ idUe, idContact, campagne })}
+          onClick={() => AppelMail({ idUe, idContact, campagne, source })}
         />
       </td>
     </tr>
@@ -53,6 +54,7 @@ export default function Ue(props) {
 Ue.propTypes = {
   idContact: PropTypes.string.isRequired,
   idUe: PropTypes.string.isRequired,
+  source: PropTypes.string.isRequired,
   Nom: PropTypes.string.isRequired,
   Prenom: PropTypes.string.isRequired,
   Lien: PropTypes.func.isRequired,

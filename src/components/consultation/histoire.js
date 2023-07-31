@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import estGestionnaire from 'utils/roles';
+import PropTypes from "prop-types";
+import React from "react";
+import estGestionnaire from "utils/roles";
 
 export default function Histoire(props) {
   const {

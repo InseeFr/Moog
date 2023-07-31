@@ -1,13 +1,13 @@
-import HistoireContainer from 'containers/histoire';
-import UeContainer from 'containers/ue';
-import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
-import Pagination from 'react-js-pagination';
-import Modal from 'react-responsive-modal';
-import myAxios from 'utils/api-call';
-import estGestionnaire from 'utils/roles';
-import MapObjects from '../utils/jsonUtils';
-import '../../index.css';
+import HistoireContainer from "containers/histoire";
+import UeContainer from "containers/ue";
+import PropTypes from "prop-types";
+import React, { useEffect, useState } from "react";
+import Pagination from "react-js-pagination";
+import Modal from "react-responsive-modal";
+import myAxios from "utils/api-call";
+import estGestionnaire from "utils/roles";
+import MapObjects from "../utils/jsonUtils";
+import "../../index.css";
 import {
   boutonSupprimerCondition,
   pathConsultationFiltre,
@@ -20,11 +20,11 @@ import {
   pathStartSiteMiroir,
   pathTransmissionCampagne,
   pathUniteEnquete,
-} from '../../utils/properties';
-import Form from './formAjoutISG';
+} from "../../utils/properties";
+import Form from "./formAjoutISG";
 
 const Consultation = ({ roles, linkQuestionnaire, urlColemanPromotion }) => {
-  const convertTimeStampToFormattedDate = isg => {
+  const convertTimeStampToFormattedDate = (isg) => {
     const timestamp = isg.dateInfo;
     // expected format : "dd-MM-yyyy hh:mm"
     const date = new Date(timestamp);
@@ -51,17 +51,19 @@ const Consultation = ({ roles, linkQuestionnaire, urlColemanPromotion }) => {
   };
 
   const [ueFiltree, setUeFiltree] = useState([]);
-  const [motFiltre, setMotFiltre] = useState('');
+  const [motFiltre, setMotFiltre] = useState("");
   const [ueSelectionne, setUeSelectionne] = useState(undefined);
   const [historiqueSelectionne, setHistoriqueSelectionne] = useState([]);
   const [isMailTableauVisible, setIsMailTableauVisible] = useState(false);
-  const [idSuiviASupprimer, setIdSuiviASupprimer] = useState('');
+  const [idSuiviASupprimer, setIdSuiviASupprimer] = useState("");
   const [activePage, setActivePage] = useState(1);
   const [mail, setMail] = useState(null);
   const [itemsCountPerPage, setItemsCountPerPage] = useState(null);
   const [totalItemsCount, setTotalItemsCount] = useState(null);
   const [hauteurSelection, setHauteurSelection] = useState(null);
-  const [openModalSupprimerSuivie, setOpenModalSupprimerSuivie] = useState(false);
+  const [openModalSupprimerSuivie, setOpenModalSupprimerSuivie] = useState(
+    false
+  );
   const [openModalAddISG, setOpenModalAddISG] = useState(false);
   const [openModalReset, setOpenModalReset] = useState(false);
 
@@ -79,12 +81,11 @@ const Consultation = ({ roles, linkQuestionnaire, urlColemanPromotion }) => {
   };
 
   useEffect(() => {
-    const filtre = bdd => {
+    const filtre = (bdd) => {
       const newItemsCountPerPage = bdd.size;
       const newTotalItemsCount = bdd.totalElements;
-      console.log(bdd.content);
-      const results = MapObjects(bdd.content, 'surveyUnitFilter');
-      const updatedResults = results.map(result => {
+      const results = MapObjects(bdd.content, "surveyUnitFilter");
+      const updatedResults = results.map((result) => {
         const timestamp = new Date(result.pubDate);
         console.log(timestamp);
         const dateString = timestamp.toGMTString();
@@ -93,7 +94,6 @@ const Consultation = ({ roles, linkQuestionnaire, urlColemanPromotion }) => {
           dateString,
         };
       });
-
       setIsMailTableauVisible(false);
       setTotalItemsCount(newTotalItemsCount);
       setItemsCountPerPage(newItemsCountPerPage);
@@ -105,14 +105,14 @@ const Consultation = ({ roles, linkQuestionnaire, urlColemanPromotion }) => {
       if (motFiltre2 !== null) {
         path = `${path}&filter2=${motFiltre2}`;
       }
-      path = `${path}&page=${page}&size=25`;
+      path = `${path}&pageNo=${page}&pageSize=25`;
 
       myAxios()
         .get(path)
-        .then(res => {
+        .then((res) => {
           filtre(res.data);
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     };
@@ -130,7 +130,7 @@ const Consultation = ({ roles, linkQuestionnaire, urlColemanPromotion }) => {
     }
   }, [motFiltre, activePage]);
 
-  const linkSiteMirroir = obj => {
+  const linkSiteMirroir = (obj) => {
     const {
       campagne: { idCampagne },
       idUe,
@@ -140,33 +140,33 @@ const Consultation = ({ roles, linkQuestionnaire, urlColemanPromotion }) => {
     );
   };
 
-  const appel = history => {
+  const appel = (history) => {
     setIsMailTableauVisible(false);
     setHistoriqueSelectionne(history);
   };
 
-  const ajustTopMargin = ue => {
+  const ajustTopMargin = (ue) => {
     const el = document.getElementById(`${ue.idUe}-${ue.campagne.idCampagne}`);
     setHauteurSelection(el.offsetTop + 30);
     setUeSelectionne(ue);
   };
 
-  const appelHistorique = ue => {
+  const appelHistorique = (ue) => {
     myAxios()
       .get(
         `${pathTransmissionCampagne}${ue.campagne.idCampagne}${pathUniteEnquete}/${ue.idUe}${pathInfoSuiviGestions}`
       )
-      .then(res => {
-        appel(MapObjects(res.data.datas, 'managementMonitoringInfo'));
+      .then((res) => {
+        appel(MapObjects(res.data.datas, "managementMonitoringInfo"));
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
 
     ajustTopMargin(ue);
   };
 
-  const openDeleteForm = id => {
+  const openDeleteForm = (id) => {
     setIdSuiviASupprimer(id);
     setOpenModalSupprimerSuivie(true);
   };
@@ -177,7 +177,10 @@ const Consultation = ({ roles, linkQuestionnaire, urlColemanPromotion }) => {
 
   // cf autre commentaire sur cinématique de cette fonction
   const onOpenModalReset = () => {
-    window.open(`${urlColemanPromotion}/log/assistance`, '_blank');
+    window.open(
+      `${urlColemanPromotion}/${ueSelectionne.source.toLowerCase()}/assistance`,
+      "_blank"
+    );
     // this.setState({
     //   openModalReset: true,
     // });
@@ -199,7 +202,7 @@ const Consultation = ({ roles, linkQuestionnaire, urlColemanPromotion }) => {
     const deletion = async () => {
       await myAxios()
         .delete(pathInfoSuiviGestions + idSuiviASupprimer)
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     };
@@ -211,12 +214,15 @@ const Consultation = ({ roles, linkQuestionnaire, urlColemanPromotion }) => {
 
   const ajouterISG = (campagneId, isg) => {
     const formattedIsg = convertTimeStampToFormattedDate(isg);
-    console.log(formattedIsg)
-    
-    const upload = MapObjects({ data: [isg] }, 'infoSuiviGestion');
+    console.log(formattedIsg);
+
+    const upload = MapObjects({ data: [isg] }, "infoSuiviGestion");
     myAxios()
-      .post(pathTransmissionCampagne + campagneId + pathEnregistrerInfoSuiviGestion, upload)
-      .catch(error => {
+      .post(
+        pathTransmissionCampagne + campagneId + pathEnregistrerInfoSuiviGestion,
+        upload
+      )
+      .catch((error) => {
         // TODO : show the result of api call
         console.log(error);
       })
@@ -226,19 +232,19 @@ const Consultation = ({ roles, linkQuestionnaire, urlColemanPromotion }) => {
       });
   };
 
-  const updateMail = newMail => {
+  const updateMail = (newMail) => {
     setHistoriqueSelectionne([]);
     setIsMailTableauVisible(true);
     setMail(newMail);
   };
 
-  const appelMail = ue => {
+  const appelMail = (ue) => {
     myAxios()
       .get(`${pathContact}/${ue.idContact}${pathMail}`)
-      .then(res => {
+      .then((res) => {
         updateMail(res.data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
     ajustTopMargin(ue);
@@ -251,16 +257,16 @@ const Consultation = ({ roles, linkQuestionnaire, urlColemanPromotion }) => {
           className="form-control"
           type="text"
           placeholder="Taper trois lettres minimum pour lancer la recherche"
-          onChange={e => {
+          onChange={(e) => {
             setMotFiltre(e.target.value);
             setActivePage(1);
           }}
         />
 
         {!anyDataFetched() && motFiltre.length > 2 && (
-          <h5 style={{ color: 'red' }}>
-            La requête n'a pas renvoyé de données, votre chaîne de caractères n'a pas été trouvée
-            dans la base de données.
+          <h5 style={{ color: "red" }}>
+            La requête n'a pas renvoyé de données, votre chaîne de caractères
+            n'a pas été trouvée dans la base de données.
           </h5>
         )}
 
@@ -280,33 +286,48 @@ const Consultation = ({ roles, linkQuestionnaire, urlColemanPromotion }) => {
                 </tr>
               </thead>
               <tbody>
-                {ueFiltree.map(({ campagne, idUe, idContact, nom, prenom, adresse }) => (
-                  <UeContainer
-                    idContact={idContact}
-                    idUe={idUe}
-                    campagne={campagne}
-                    adresse={adresse}
-                    Nom={nom}
-                    Prenom={prenom}
-                    AppelHistorique={() => appelHistorique({ idUe, idContact, campagne })}
-                    AppelMail={() => appelMail({ idUe, idContact, campagne })}
-                    Lien={() => linkSiteMirroir({ idUe, campagne })}
-                    // generating unique keys by adding campagneId
-                    key={`${idUe}_${campagne.idCampagne}`}
-                  />
-                ))}
+                {ueFiltree.map(
+                  ({
+                    campagne,
+                    idUe,
+                    idContact,
+                    nom,
+                    prenom,
+                    adresse,
+                    source,
+                  }) => (
+                    <UeContainer
+                      idContact={idContact}
+                      idUe={idUe}
+                      campagne={campagne}
+                      adresse={adresse}
+                      source={source}
+                      Nom={nom}
+                      Prenom={prenom}
+                      AppelHistorique={() =>
+                        appelHistorique({ idUe, idContact, campagne })
+                      }
+                      AppelMail={() =>
+                        appelMail({ idUe, idContact, campagne, source })
+                      }
+                      Lien={() => linkSiteMirroir({ idUe, campagne })}
+                      // generating unique keys by adding campagneId
+                      key={`${idUe}_${idContact}_${campagne.idCampagne}`}
+                    />
+                  )
+                )}
               </tbody>
             </table>
             <div className="text-center">
               <Pagination
-                hideNavigation="true"
+                hideNavigation={true}
                 activePage={activePage}
                 itemsCountPerPage={itemsCountPerPage}
                 totalItemsCount={totalItemsCount}
                 pageRangeDisplayed={10}
                 itemClass="page-item"
                 linkClass="btn btn-light"
-                onChange={pageNumber => setActivePage(pageNumber)}
+                onChange={(pageNumber) => setActivePage(pageNumber)}
               />
             </div>
           </div>
@@ -314,9 +335,15 @@ const Consultation = ({ roles, linkQuestionnaire, urlColemanPromotion }) => {
       </div>
 
       {isHistoryTableVisible() && (
-        <div className="col-md-3" style={{ marginTop: `${hauteurSelection}px` }}>
+        <div
+          className="col-md-3"
+          style={{ marginTop: `${hauteurSelection}px` }}
+        >
           <h3>{`Historique de ${ueSelectionne.idContact}`}</h3>
-          <table id="tableauSuiviConsultation" className="table table-bordered table-striped">
+          <table
+            id="tableauSuiviConsultation"
+            className="table table-bordered table-striped"
+          >
             <thead>
               <tr>
                 <th>Date</th>
@@ -333,7 +360,9 @@ const Consultation = ({ roles, linkQuestionnaire, urlColemanPromotion }) => {
                     DateD={dateInfo}
                     Statut={statut}
                     IdInfosuivi={idInfosuivi}
-                    onOpenModalSupprimerSuivie={() => openDeleteForm(idInfosuivi)}
+                    onOpenModalSupprimerSuivie={() =>
+                      openDeleteForm(idInfosuivi)
+                    }
                     SupprimerCondition={boutonSupprimerCondition}
                     key={idInfosuivi}
                   />
@@ -355,9 +384,15 @@ const Consultation = ({ roles, linkQuestionnaire, urlColemanPromotion }) => {
         </div>
       )}
       {isMailTableauVisible && (
-        <div className="col-md-3" style={{ marginTop: `${hauteurSelection}px` }}>
+        <div
+          className="col-md-3"
+          style={{ marginTop: `${hauteurSelection}px` }}
+        >
           <h3>{`Mail de ${ueSelectionne.idContact}`}</h3>
-          <table id="tableauSuiviConsultation" className="table table-bordered table-striped">
+          <table
+            id="tableauSuiviConsultation"
+            className="table table-bordered table-striped"
+          >
             <thead>
               <tr>
                 <th>Mail</th>
@@ -403,7 +438,12 @@ const Consultation = ({ roles, linkQuestionnaire, urlColemanPromotion }) => {
         </button>
       </Modal>
       {/* vérifier la cinétique du bouton : formulaire intermédaire ou pas. Oui et Non mènent au même comportement */}
-      <Modal open={openModalReset} onClose={() => onCloseModalReset()} closeIconSize={0} center>
+      <Modal
+        open={openModalReset}
+        onClose={() => onCloseModalReset()}
+        closeIconSize={0}
+        center
+      >
         <h1>Êtes-vous sûr?</h1>
         <button
           type="button"
@@ -420,7 +460,12 @@ const Consultation = ({ roles, linkQuestionnaire, urlColemanPromotion }) => {
           Non
         </button>
       </Modal>
-      <Modal open={openModalAddISG} onClose={() => closeAddISGForm()} closeIconSize={0} center>
+      <Modal
+        open={openModalAddISG}
+        onClose={() => closeAddISGForm()}
+        closeIconSize={0}
+        center
+      >
         <Form
           closeModal={() => closeAddISGForm()}
           uniteEnquete={ueSelectionne}

@@ -1,5 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
 export default function VagueCollecte(props) {
   const {
@@ -24,9 +24,14 @@ export default function VagueCollecte(props) {
       <td>{Math.round(nbHC * 10) / 10}</td>
       <td>{Math.round(nbRefus * 10) / 10}</td>
       <td>{Math.round(nbAutresDechets * 10) / 10}</td>
-      <td>{Math.round((nbPND + nbHC + nbRefus + nbAutresDechets) * 10) / 10}</td>
       <td>
-        {Math.round((nbIntRecu + nbPapRecu + nbPND + nbHC + nbRefus + nbAutresDechets) * 10) / 10}
+        {Math.round((nbPND + nbHC + nbRefus + nbAutresDechets) * 10) / 10}
+      </td>
+      <td>
+        {Math.round(
+          (nbIntRecu + nbPapRecu + nbPND + nbHC + nbRefus + nbAutresDechets) *
+            10
+        ) / 10}
       </td>
       <td>{Math.round(nbIntPart * 10) / 10}</td>
     </tr>
@@ -35,7 +40,7 @@ export default function VagueCollecte(props) {
 
 VagueCollecte.propTypes = {
   nbUe: PropTypes.number.isRequired,
-  numeroDeLot: PropTypes.number.isRequired,
+  numeroDeLot: PropTypes.string.isRequired,
   nbIntRecu: PropTypes.number.isRequired,
   nbPapRecu: PropTypes.number.isRequired,
   nbPND: PropTypes.number.isRequired,
