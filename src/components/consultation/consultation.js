@@ -84,7 +84,6 @@ const Consultation = ({ roles, linkQuestionnaire, urlColemanPromotion }) => {
     const filtre = (bdd) => {
       const newItemsCountPerPage = bdd.size;
       const newTotalItemsCount = bdd.totalElements;
-      console.log(bdd.content);
       const results = MapObjects(bdd.content, "surveyUnitFilter");
       const updatedResults = results.map((result) => {
         const timestamp = new Date(result.pubDate);
@@ -95,7 +94,7 @@ const Consultation = ({ roles, linkQuestionnaire, urlColemanPromotion }) => {
           dateString,
         };
       });
-
+      console.log(updatedResults);
       setIsMailTableauVisible(false);
       setTotalItemsCount(newTotalItemsCount);
       setItemsCountPerPage(newItemsCountPerPage);
@@ -179,7 +178,10 @@ const Consultation = ({ roles, linkQuestionnaire, urlColemanPromotion }) => {
 
   // cf autre commentaire sur cinématique de cette fonction
   const onOpenModalReset = () => {
-    window.open(`${urlColemanPromotion}/log/assistance`, "_blank");
+    window.open(
+      `${urlColemanPromotion}/${ueSelectionne.source.toLowerCase()}/assistance`,
+      "_blank"
+    );
     // this.setState({
     //   openModalReset: true,
     // });
@@ -286,21 +288,32 @@ const Consultation = ({ roles, linkQuestionnaire, urlColemanPromotion }) => {
               </thead>
               <tbody>
                 {ueFiltree.map(
-                  ({ campagne, idUe, idContact, nom, prenom, adresse }) => (
+                  ({
+                    campagne,
+                    idUe,
+                    idContact,
+                    nom,
+                    prenom,
+                    adresse,
+                    source,
+                  }) => (
                     <UeContainer
                       idContact={idContact}
                       idUe={idUe}
                       campagne={campagne}
                       adresse={adresse}
+                      source={source}
                       Nom={nom}
                       Prenom={prenom}
                       AppelHistorique={() =>
                         appelHistorique({ idUe, idContact, campagne })
                       }
-                      AppelMail={() => appelMail({ idUe, idContact, campagne })}
+                      AppelMail={() =>
+                        appelMail({ idUe, idContact, campagne, source })
+                      }
                       Lien={() => linkSiteMirroir({ idUe, campagne })}
                       // generating unique keys by adding campagneId
-                      key={`${idUe}_${campagne.idCampagne}`}
+                      key={`${idUe}_${idContact}_${campagne.idCampagne}`}
                     />
                   )
                 )}
