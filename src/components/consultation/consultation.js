@@ -308,7 +308,7 @@ const Consultation = ({ roles, linkQuestionnaire, urlColemanPromotion }) => {
             </table>
             <div className="text-center">
               <Pagination
-                hideNavigation="true"
+                hideNavigation={true}
                 activePage={activePage}
                 itemsCountPerPage={itemsCountPerPage}
                 totalItemsCount={totalItemsCount}

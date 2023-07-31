@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import LigneRelance from './ligneRelance';
+import PropTypes from "prop-types";
+import React from "react";
+import LigneRelance from "./ligneRelance";
 
 export default function VagueRelance(props) {
   const { donnees } = props;
@@ -18,10 +18,10 @@ export default function VagueRelance(props) {
   donnees.forEach(({ numlot, nb }) => {
     addNbToMax(numlot, nb);
   });
-  const getMax = numLot => maxNbSu.get(numLot);
+  const getMax = (numLot) => maxNbSu.get(numLot);
 
   const dataWithTot = donnees
-    .map(element => ({ ...element, nbTotal: getMax(element.numlot) }))
+    .map((element) => ({ ...element, nbTotal: getMax(element.numlot) }))
     .sort((a, b) => a.numlot - b.numlot)
     .sort((a, b) => a.freq - b.freq);
 
@@ -29,9 +29,9 @@ export default function VagueRelance(props) {
     if (previousData === undefined) {
       return data;
     }
-    return data.map(element => {
+    return data.map((element) => {
       const previousElementWithSameNumlot = previousData.filter(
-        e => e.numlot === element.numlot
+        (e) => e.numlot === element.numlot
       )[0];
       if (previousElementWithSameNumlot === undefined) {
         return element;
@@ -41,10 +41,14 @@ export default function VagueRelance(props) {
   };
 
   const structuredData = [];
-  const freqMax = donnees.reduce((max, line) => (line.freq > max ? line.freq : max), 0);
-  const filteredData = value => dataWithTot.filter(line => line.freq === value);
+  const freqMax = donnees.reduce(
+    (max, line) => (line.freq > max ? line.freq : max),
+    0
+  );
+  const filteredData = (value) =>
+    dataWithTot.filter((line) => line.freq === value);
   const updateFreq = (previousData, newFreq) =>
-    previousData.map(followupData => ({ ...followupData, freq: newFreq }));
+    previousData.map((followupData) => ({ ...followupData, freq: newFreq }));
   let x;
   let previousData;
   for (x = freqMax; x > 0; x -= 1) {
@@ -60,37 +64,44 @@ export default function VagueRelance(props) {
     structuredData[x] = { numRelance: x, data };
   }
 
-  const numlots = [...new Set(donnees.map(line => line.numlot))];
+  const numlots = [...new Set(donnees.map((line) => line.numlot))];
 
-  const completeBlock = block => {
-    const blockNumLots = block.data.map(line => line.numlot);
+  const completeBlock = (block) => {
+    const blockNumLots = block.data.map((line) => line.numlot);
     const completedBlock = block;
-    numlots.forEach(num => {
+    numlots.forEach((num) => {
       if (!blockNumLots.includes(num)) {
-        completedBlock.data.push({ freq: 1, nb: 0, nbTotal: maxNbSu.get(num), numlot: num });
+        completedBlock.data.push({
+          freq: 1,
+          nb: 0,
+          nbTotal: maxNbSu.get(num),
+          numlot: num,
+        });
         completedBlock.data = block.data.sort((a, b) => a.numlot - b.numlot);
       }
     });
     return completedBlock;
   };
 
-  structuredData.map(block => completeBlock(block));
+  structuredData.map((block) => completeBlock(block));
   return (
     <>
-      {structuredData.length === 0 && <div>Aucune relance pour cette enquête.</div>}
+      {structuredData.length === 0 && (
+        <div>Aucune relance pour cette enquête.</div>
+      )}
       {structuredData.length !== 0 && (
         <table className="table table-bordered colored-table">
           <thead>
             <tr>
               <th className="no-border" />
-              <th>Lot</th>
+              <th>Partition</th>
               <th>Nombre d'unités enquêtées</th>
               <th>Nombre d'unités relancées</th>
               <th>% d'unités relancées</th>
             </tr>
           </thead>
           <tbody>
-            {structuredData.map(bloc => (
+            {structuredData.map((bloc) => (
               <LigneRelance numRelance={bloc.numRelance} data={bloc.data} />
             ))}
           </tbody>
@@ -105,7 +116,7 @@ VagueRelance.propTypes = {
     PropTypes.shape({
       nb: PropTypes.number.isRequired,
       freq: PropTypes.number.isRequired,
-      numlot: PropTypes.number.isRequired,
+      numlot: PropTypes.string.isRequired,
     }).isRequired
   ).isRequired,
 };
