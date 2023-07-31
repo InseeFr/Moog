@@ -88,5 +88,3 @@ export const pathTransmissionCampagne = "/campaigns/";
 export const pathContact = "/contact";
 /* path mail */
 export const pathMail = "/mail";
-/* path reinit pw */
-export const pathReinitPw = "/log/assistance";

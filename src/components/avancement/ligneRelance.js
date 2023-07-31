@@ -1,12 +1,12 @@
-import PropTypes from 'prop-types';
-import React from 'react';
+import PropTypes from "prop-types";
+import React from "react";
 
 const LigneRelance = ({ numRelance, data }) => {
   const firstColumn = { label: numRelance, length: data.length };
   const nbTotal = data.reduce((sum, line) => sum + line.nbTotal, 0);
   const nb = data.reduce((sum, line) => sum + line.nb, 0);
   const total = {
-    numlot: 'Total',
+    numlot: "Total",
     nbTotal,
     nb,
     freq: numRelance,
@@ -16,7 +16,10 @@ const LigneRelance = ({ numRelance, data }) => {
   const otherLines = data.slice(1);
 
   const lineWithData = (lineData, firstCell) => {
-    const id = firstCell !== undefined ? firstCell.label : `${lineData.freq}${lineData.numlot}`;
+    const id =
+      firstCell !== undefined
+        ? firstCell.label
+        : `${lineData.freq}${lineData.numlot}`;
     return (
       <tr key={id}>
         {firstCell !== undefined && (
@@ -32,7 +35,9 @@ const LigneRelance = ({ numRelance, data }) => {
         <td key={`nbtotal${id}`}>{lineData.nbTotal}</td>
         <td key={`nb${id}`}>{lineData.nb}</td>
         <td key={`prct${id}`}>
-          {lineData.nbTotal === 0 ? 0 : Math.round((lineData.nb / lineData.nbTotal) * 1000) / 10}
+          {lineData.nbTotal === 0
+            ? 0
+            : Math.round((lineData.nb / lineData.nbTotal) * 1000) / 10}
         </td>
       </tr>
     );
@@ -41,7 +46,7 @@ const LigneRelance = ({ numRelance, data }) => {
   return (
     <>
       {lineWithData(firstLine, firstColumn)}
-      {otherLines.map(line => lineWithData(line, undefined))}
+      {otherLines.map((line) => lineWithData(line, undefined))}
       {lineWithData(total, undefined)}
     </>
   );
@@ -54,7 +59,7 @@ LigneRelance.propTypes = {
     PropTypes.shape({
       nb: PropTypes.number.isRequired,
       freq: PropTypes.number.isRequired,
-      numlot: PropTypes.number.isRequired,
+      numlot: PropTypes.string.isRequired,
       nbTotal: PropTypes.number.isRequired,
     })
   ).isRequired,

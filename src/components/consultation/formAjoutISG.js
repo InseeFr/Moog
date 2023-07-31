@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
-import { statusIsgAutorises } from '../../utils/properties';
+import PropTypes from "prop-types";
+import React, { useEffect, useState } from "react";
+import { statusIsgAutorises } from "../../utils/properties";
 
 const Form = ({ closeModal, uniteEnquete, ajouterISG }) => {
   const [isg, setIsg] = useState({
@@ -9,6 +9,7 @@ const Form = ({ closeModal, uniteEnquete, ajouterISG }) => {
     dateInfo: new Date().getTime(),
     statut: undefined,
   });
+
   const campagneId = uniteEnquete.campagne.idCampagne;
   const [formIsValid, setFormIsValid] = useState(false);
 
@@ -16,7 +17,7 @@ const Form = ({ closeModal, uniteEnquete, ajouterISG }) => {
     setFormIsValid(isg.statut !== undefined);
   }, [isg]);
 
-  const onChange = event => {
+  const onChange = (event) => {
     setIsg({ ...isg, statut: event.target.value });
   };
 
@@ -41,9 +42,15 @@ const Form = ({ closeModal, uniteEnquete, ajouterISG }) => {
           <option value={statusIsgAutorises.VALPAP.type}>
             {statusIsgAutorises.VALPAP.libelle}
           </option>
-          <option value={statusIsgAutorises.PND.type}>{statusIsgAutorises.PND.libelle}</option>
-          <option value={statusIsgAutorises.HC.type}>{statusIsgAutorises.HC.libelle}</option>
-          <option value={statusIsgAutorises.REFUS.type}>{statusIsgAutorises.REFUS.libelle}</option>
+          <option value={statusIsgAutorises.PND.type}>
+            {statusIsgAutorises.PND.libelle}
+          </option>
+          <option value={statusIsgAutorises.HC.type}>
+            {statusIsgAutorises.HC.libelle}
+          </option>
+          <option value={statusIsgAutorises.REFUS.type}>
+            {statusIsgAutorises.REFUS.libelle}
+          </option>
           <option value={statusIsgAutorises.DECHET.type}>
             {statusIsgAutorises.DECHET.libelle}
           </option>
