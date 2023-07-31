@@ -94,7 +94,6 @@ const Consultation = ({ roles, linkQuestionnaire, urlColemanPromotion }) => {
           dateString,
         };
       });
-      console.log(updatedResults);
       setIsMailTableauVisible(false);
       setTotalItemsCount(newTotalItemsCount);
       setItemsCountPerPage(newItemsCountPerPage);
