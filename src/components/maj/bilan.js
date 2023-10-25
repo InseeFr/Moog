@@ -7,7 +7,7 @@ export default function Bilan(props) {
       <div style={{ color: 'red' }}>
         <h2>Liste d'identifiants en erreur :</h2>
         {props.data.listError.map(item => (
-          <ul key={item}>{item}</ul>
+          <ul key={item}>{item.id}</ul>
         ))}
       </div>
     </div>

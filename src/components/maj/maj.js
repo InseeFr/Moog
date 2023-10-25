@@ -9,7 +9,8 @@ import {
   idContact,
   idUe,
   libellesAutorises,
-  longueurIdContact,
+  longueurIdContactMin,
+  longueurIdContactMax,
   longueurMinIdUe,
   nbChamps,
   pathEnregistrerInfoSuiviGestion,
@@ -51,7 +52,8 @@ export default class Maj extends Component {
       return (
         dataJson.data.filter(
           (item) =>
-            item[idContact].length !== longueurIdContact ||
+            item[idContact].length > longueurIdContactMax ||
+            item[idContact].length < longueurIdContactMin ||
             !(item[statut] in reponseAttenduDansCSV)
         ).length === 0
       );
@@ -76,7 +78,8 @@ export default class Maj extends Component {
         dataJson.data.filter(
           (item) =>
             item[idUe].length < longueurMinIdUe ||
-            item[idContact].length !== longueurIdContact ||
+            item[idContact].length > longueurIdContactMax ||
+            item[idContact].length < longueurIdContactMin ||
             !(item[statut] in reponseAttenduDansCSV)
         ).length === 0
       );
@@ -192,6 +195,12 @@ export default class Maj extends Component {
     const { label } = this.props;
     return (
       <div className="container">
+        Le fichier doit être au format .csv avec la virgule comme séparateur. Il
+        doit contenir les trois variables suivantes : l’identifiant internet
+        indiqué dans le courrier de l'enquêté (idcontact), l’identifiant
+        échantillon (idue) et l’information à enregistrerpropre à l’unité
+        enquêtée (statut).
+        
         {this.validDate() === "OPEN" && (
           <input
             type="file"
