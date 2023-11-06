@@ -12,12 +12,11 @@ import {
   boutonSupprimerCondition,
   pathConsultationFiltre,
   pathContact,
-  pathEndSiteMiroir,
+  pathReadonly,
   pathEnregistrerInfoSuiviGestion,
   pathFinalCampagne,
   pathInfoSuiviGestions,
   pathMail,
-  pathStartSiteMiroir,
   pathTransmissionCampagne,
   pathUniteEnquete,
 } from "../../utils/properties";
@@ -131,13 +130,18 @@ const Consultation = ({ roles, linkQuestionnaire, urlColemanPromotion }) => {
   }, [motFiltre, activePage]);
 
   const linkSiteMirroir = (obj) => {
-    const {
-      campagne: { idCampagne },
-      idUe,
-    } = obj;
-    window.open(
-      `${linkQuestionnaire}${pathStartSiteMiroir}${idCampagne}${pathEndSiteMiroir}${idUe}`
-    );
+      const {
+        campagne: { idCampagne },
+        idUe,
+      } = obj;
+    myAxios()
+      .get(`${pathReadonly}${idCampagne}/survey-unit/${idUe}`)
+      .then((res) => {
+        window.open(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const appel = (history) => {
