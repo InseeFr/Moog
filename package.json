@@ -28,8 +28,8 @@
     "tachyons-components": "^1.0.1"
   },
   "scripts": {
-    "start": "cross-env NODE_PATH=src/ react-scripts start ",
-    "build": "cross-env NODE_PATH=src/ react-scripts build",
+    "start": "cross-env NODE_PATH=src/ react-scripts --openssl-legacy-provider start ",
+    "build": "cross-env NODE_PATH=src/ react-scripts --openssl-legacy-provider build",
     "test": "cross-env NODE_PATH=src/ react-scripts test",
     "eject": "react-scripts eject"
   },
