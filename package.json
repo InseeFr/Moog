@@ -9,7 +9,7 @@
     "file-saver": "^2.0.5",
     "json2csv": "^5.0.5",
     "keycloak-js": "^18.0.0",
-    "papaparse": "^4.6.2",
+    "papaparse": "^5.2.0",
     "prop-types": "^15.7.2",
     "react": "^16.14.0",
     "react-csv": "^1.1.2",
