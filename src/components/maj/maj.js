@@ -198,7 +198,7 @@ export default class Maj extends Component {
         Le fichier doit être au format .csv avec la virgule comme séparateur. Il
         doit contenir les trois variables suivantes : l’identifiant internet
         indiqué dans le courrier de l'enquêté (idcontact), l’identifiant
-        échantillon (idue) et l’information à enregistrerpropre à l’unité
+        échantillon (idue) et l’information à enregistrer propre à l’unité
         enquêtée (statut).
         
         {this.validDate() === "OPEN" && (
