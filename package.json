@@ -1,6 +1,6 @@
 {
   "name": "front-moog",
-  "version": "2.2.1",
+  "version": "2.2.3",
   "private": true,
   "dependencies": {
     "@vtex/react-csv-parse": "^3.0.2",

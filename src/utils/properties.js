@@ -51,13 +51,11 @@ export const libellesAutorises = [
 /* longueur de l'identifiant idUe */
 export const longueurMinIdUe = 1;
 /* longueur de l'identifiant du contact */
-export const longueurIdContact = 7;
+export const longueurIdContactMin = 7;
+export const longueurIdContactMax = 8;
 /* Nombre de colonnes dans le fichier à importer */
-export const nbChamps = [2, 3, 4];
+export const nbChamps = [3, 4, 5];
 
-/* path pour construire l'url du site miroir Coleman */
-export const pathStartSiteMiroir = "/readonly/questionnaire/";
-export const pathEndSiteMiroir = "/unite-enquetee/";
 
 /* path pour recherche */
 export const pathConsultationFiltre = "/survey-units?filter1=";
@@ -88,3 +86,5 @@ export const pathTransmissionCampagne = "/campaigns/";
 export const pathContact = "/contact";
 /* path mail */
 export const pathMail = "/mail";
+/*path readOnly*/
+export const pathReadonly = "/readonly/campaigns/";
