@@ -130,10 +130,10 @@ const Consultation = ({ roles, linkQuestionnaire, urlColemanPromotion }) => {
   }, [motFiltre, activePage]);
 
   const linkSiteMirroir = (obj) => {
-      const {
-        campagne: { idCampagne },
-        idUe,
-      } = obj;
+    const {
+      campagne: { idCampagne },
+      idUe,
+    } = obj;
     myAxios()
       .get(`${pathReadonly}${idCampagne}/survey-unit/${idUe}`)
       .then((res) => {
@@ -205,7 +205,7 @@ const Consultation = ({ roles, linkQuestionnaire, urlColemanPromotion }) => {
   const supprimerSuivi = async () => {
     const deletion = async () => {
       await myAxios()
-        .delete(pathInfoSuiviGestions + idSuiviASupprimer)
+        .delete(`${pathInfoSuiviGestions}/${idSuiviASupprimer}`)
         .catch((error) => {
           console.log(error);
         });

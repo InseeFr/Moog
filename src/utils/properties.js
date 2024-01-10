@@ -56,14 +56,13 @@ export const longueurIdContactMax = 8;
 /* Nombre de colonnes dans le fichier à importer */
 export const nbChamps = [3, 4, 5];
 
-
 /* path pour recherche */
 export const pathConsultationFiltre = "/survey-units?filter1=";
 /* path pour suppression d'un suivi */
 export const pathUniteEnquete = "/survey-units";
 /* path pour suppression d'un suivi */
 export const pathInfoSuiviGestion = "/management-monitoring-info";
-export const pathInfoSuiviGestions = "/management-monitoring-infos/";
+export const pathInfoSuiviGestions = "/management-monitoring-infos";
 /* path pour suppression d'un upload */
 export const pathSuppressionUpload = "/uploads/";
 /*  path pour le post des infosuivigestion */
