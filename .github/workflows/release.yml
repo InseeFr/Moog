@@ -72,7 +72,7 @@ jobs:
           prop_path: 'version'
       - run: echo ${{steps.version.outputs.prop}}
       - name: Publish to Registry
-        uses: elgohr/Publish-Docker-Github-Action@master
+        uses: elgohr/Publish-Docker-Github-Action@v5
         with:
           name: inseefr/moog
           username: ${{ secrets.DOCKERHUB_USERNAME }}
