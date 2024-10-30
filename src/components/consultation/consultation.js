@@ -22,7 +22,7 @@ import {
 } from "../../utils/properties";
 import Form from "./formAjoutISG";
 
-const Consultation = ({ roles, linkQuestionnaire, urlColemanPromotion }) => {
+const Consultation = ({ roles, urlColemanPromotion }) => {
   const convertTimeStampToFormattedDate = (isg) => {
     const timestamp = isg.dateInfo;
     // expected format : "dd-MM-yyyy hh:mm"
@@ -84,19 +84,10 @@ const Consultation = ({ roles, linkQuestionnaire, urlColemanPromotion }) => {
       const newItemsCountPerPage = bdd.size;
       const newTotalItemsCount = bdd.totalElements;
       const results = MapObjects(bdd.content, "surveyUnitFilter");
-      const updatedResults = results.map((result) => {
-        const timestamp = new Date(result.pubDate);
-        console.log(timestamp);
-        const dateString = timestamp.toGMTString();
-        return {
-          ...result,
-          dateString,
-        };
-      });
       setIsMailTableauVisible(false);
       setTotalItemsCount(newTotalItemsCount);
       setItemsCountPerPage(newItemsCountPerPage);
-      setUeFiltree(updatedResults);
+      setUeFiltree(results);
     };
 
     const fetchURL = (page, motFiltre1, motFiltre2) => {
@@ -118,7 +109,7 @@ const Consultation = ({ roles, linkQuestionnaire, urlColemanPromotion }) => {
     setHistoriqueSelectionne([]);
 
     if (motFiltre.length > 2) {
-      if (estGestionnaire(roles)) {
+      if (isGestionnaire) {
         fetchURL(activePage - 1, motFiltre, motFiltre);
       } else {
         fetchURL(activePage - 1, motFiltre, null);
@@ -127,7 +118,7 @@ const Consultation = ({ roles, linkQuestionnaire, urlColemanPromotion }) => {
       setIsMailTableauVisible(false);
       setUeFiltree([]);
     }
-  }, [motFiltre, activePage]);
+  }, [motFiltre, activePage, isGestionnaire]);
 
   const linkSiteMirroir = (obj) => {
     const {
@@ -470,11 +461,13 @@ const Consultation = ({ roles, linkQuestionnaire, urlColemanPromotion }) => {
         closeIconSize={0}
         center
       >
-        <Form
-          closeModal={() => closeAddISGForm()}
-          uniteEnquete={ueSelectionne}
-          ajouterISG={ajouterISG}
-        />
+        {ueSelectionne && (
+          <Form
+            closeModal={() => closeAddISGForm()}
+            uniteEnquete={ueSelectionne}
+            ajouterISG={ajouterISG}
+          />
+        )}
       </Modal>
     </div>
   );
@@ -482,6 +475,5 @@ const Consultation = ({ roles, linkQuestionnaire, urlColemanPromotion }) => {
 export default Consultation;
 Consultation.propTypes = {
   roles: PropTypes.arrayOf(PropTypes.string).isRequired,
-  linkQuestionnaire: PropTypes.string.isRequired,
   urlColemanPromotion: PropTypes.string.isRequired,
 };

@@ -2,11 +2,11 @@ import {
   SAVE_KEYCLOAK_TOKEN,
   REFRESH_KEYCLOAK_TOKEN,
   SAVE_NO_AUTH_LOGIN,
-} from 'actions/constants/keycloak';
-import { getRolesFromKc } from 'utils/keycloak/token';
-import { GESTIONNAIRE_ROLE } from 'utils/properties';
+} from "actions/constants/keycloak";
+import { getRolesFromKc } from "utils/keycloak/token";
+import { GESTIONNAIRE_ROLE } from "utils/properties";
 
-export default (state = {}, action) => {
+const reducer = (state = {}, action) => {
   const { type, payload: kc } = action;
   switch (type) {
     case SAVE_NO_AUTH_LOGIN:
@@ -19,3 +19,5 @@ export default (state = {}, action) => {
       return state;
   }
 };
+
+export default reducer;
