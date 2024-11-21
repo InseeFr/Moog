@@ -1,13 +1,13 @@
 {
   "name": "front-moog",
-  "version": "2.2.6",
+  "version": "2.2.7",
   "private": true,
   "dependencies": {
     "axios": "^0.21.2",
     "babel-polyfill": "^6.23.0",
     "file-saver": "^2.0.5",
     "json2csv": "^5.0.5",
-    "keycloak-js": "^18.0.0",
+    "keycloak-js": "^26.0.0",
     "papaparse": "^5.2.0",
     "prop-types": "^15.7.2",
     "react": "^16.14.0",

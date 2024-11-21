@@ -78,7 +78,7 @@ const Auth = ({
     };
 
     if (authType === KEYCLOAK && !!kc) {
-      kc.init({ onLoad: "login-required" })
+      kc.init({ onLoad: "login-required", checkLoginIframe: false })
         .then(() => {
           setToken(kc.token);
           saveKeycloakToken(kc);
