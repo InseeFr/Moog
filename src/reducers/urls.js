@@ -1,6 +1,10 @@
-import { URL_BACK_END, URL_SITE_MIRROIR, URL_COLEMAN_PROMOTION } from 'actions/constants/url';
+import {
+  URL_BACK_END,
+  URL_SITE_MIRROIR,
+  URL_COLEMAN_PROMOTION,
+} from "actions/constants/url";
 
-export default (state = {}, action) => {
+const reducer = (state = {}, action) => {
   const { type, payload: url } = action;
   switch (type) {
     case URL_BACK_END:
@@ -13,3 +17,5 @@ export default (state = {}, action) => {
       return state;
   }
 };
+
+export default reducer;

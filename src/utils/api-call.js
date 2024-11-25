@@ -1,5 +1,5 @@
-import axios from 'axios';
-import store from 'store/configure-store';
+import axios from "axios";
+import store from "store/configure-store";
 
 export function authHeader(config) {
   // return authorization header with auth credentials or none if anonymous
@@ -13,24 +13,24 @@ export function authHeader(config) {
     return {
       ...config.headers,
       Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json;charset=utf-8',
-      Accept: 'application/json;charset=utf-8',
+      "Content-Type": "application/json;charset=utf-8",
+      Accept: "application/json;charset=utf-8",
     };
   }
   return {
     ...config.headers,
-    'Content-Type': 'application/json;charset=utf-8',
-    Accept: 'application/json;charset=utf-8',
+    "Content-Type": "application/json;charset=utf-8",
+    Accept: "application/json;charset=utf-8",
   };
 }
 
-export default () => {
+const createAxiosInstance = () => {
   const urlBack = store.getState().urls.linkBack;
   const myAxios = axios.create({
     baseURL: `${urlBack}/`,
   });
 
-  myAxios.interceptors.request.use(async config =>
+  myAxios.interceptors.request.use(async (config) =>
     Promise.resolve({
       ...config,
       headers: authHeader(config),
@@ -38,3 +38,5 @@ export default () => {
   );
   return myAxios;
 };
+
+export default createAxiosInstance;

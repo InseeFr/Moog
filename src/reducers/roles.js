@@ -4,7 +4,7 @@ import {
   ROLE_GESTIONNAIRE,
 } from "actions/constants/roles";
 
-export default (state = {}, action) => {
+const reducer = (state = {}, action) => {
   const { type, payload: roles } = action;
   switch (type) {
     case ROLE_ADMINISTRATEUR:
@@ -17,3 +17,5 @@ export default (state = {}, action) => {
       return state;
   }
 };
+
+export default reducer;

@@ -44,39 +44,41 @@ const Auth = ({
     if (authType === KEYCLOAK && identityProvider) {
       const keycloakTemp = new Keycloak(confKeycloak);
       const kcLogin = keycloakTemp.login;
-      keycloakTemp.login = (options) => {
-        const options2 = options;
-        options2.idpHint = identityProvider;
-        kcLogin(options2);
-      };
-      keycloakTemp.redirectUri = window.location.href.replace(
-        window.location.search,
-        ""
-      );
+      keycloakTemp.login = (options = {}) =>
+        kcLogin({ ...options, idpHint: identityProvider });
       setKc(keycloakTemp);
     }
-  }, [authType, identityProvider]);
-
-  const refreshToken = () => {
-    kc.updateToken(30)
-      .then((isUpdated) => {
-        if (isUpdated) {
-          setToken(kc.token);
-          refreshKeycloakToken(kc);
-        }
-      })
-      .catch(() => {
-        window.location.href = window.location;
-      });
-  };
-
-  const loginNoAuth = () => {
-    saveNoAuthLogin();
-  };
+  }, [
+    authType,
+    identityProvider,
+    saveRoleAdministrateur,
+    saveRoleAssistance,
+    saveRoleGestionnaire,
+    saveUrlBackEnd,
+    saveUrlColemanPromotion,
+    saveUrlSiteMirroir,
+  ]);
 
   useEffect(() => {
+    const loginNoAuth = () => {
+      saveNoAuthLogin();
+    };
+
+    const refreshToken = () => {
+      kc.updateToken(30)
+        .then((isUpdated) => {
+          if (isUpdated) {
+            setToken(kc.token);
+            refreshKeycloakToken(kc);
+          }
+        })
+        .catch(() => {
+          window.location.href = window.location;
+        });
+    };
+
     if (authType === KEYCLOAK && !!kc) {
-      kc.init({ onLoad: "login-required" })
+      kc.init({ onLoad: "login-required", checkLoginIframe: false })
         .then(() => {
           setToken(kc.token);
           saveKeycloakToken(kc);
@@ -86,7 +88,7 @@ const Auth = ({
     } else if (authType === NO_AUTH) {
       loginNoAuth();
     }
-  }, [kc, authType]);
+  }, [kc, authType, saveKeycloakToken, saveNoAuthLogin, refreshKeycloakToken]);
 
   return (
     <>
@@ -95,7 +97,7 @@ const Auth = ({
       )}
       {!error && authType === KEYCLOAK && token && <AppContainer />}
       {!error && authType === NO_AUTH && <AppContainer />}
-      {error && <div>Erreur inconnue - probléme authentification !</div>}
+      {error && <div>Erreur inconnue - problème d'authentification !</div>}
     </>
   );
 };
