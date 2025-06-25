@@ -1,6 +1,6 @@
 {
   "name": "front-moog",
-  "version": "2.2.7",
+  "version": "2.2.8",
   "private": true,
   "dependencies": {
     "axios": "^0.21.2",
