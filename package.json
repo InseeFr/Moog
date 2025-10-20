@@ -3,7 +3,7 @@
   "version": "2.2.8",
   "private": true,
   "dependencies": {
-    "axios": "^0.21.2",
+    "axios": "^0.30.2",
     "babel-polyfill": "^6.23.0",
     "file-saver": "^2.0.5",
     "json2csv": "^5.0.5",
