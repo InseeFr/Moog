@@ -1,13 +1,13 @@
 {
   "name": "front-moog",
-  "version": "2.2.8",
+  "version": "2.2.9",
   "private": true,
   "dependencies": {
-    "axios": "^0.21.2",
+    "axios": "^0.30.2",
     "babel-polyfill": "^6.23.0",
     "file-saver": "^2.0.5",
     "json2csv": "^5.0.5",
-    "keycloak-js": "^26.0.0",
+    "keycloak-js": "26.0.5",
     "papaparse": "^5.2.0",
     "prop-types": "^15.7.2",
     "react": "^16.14.0",
@@ -48,5 +48,9 @@
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.37.1",
     "prettier": "^1.19.1"
+  },
+  "resolutions": {
+    "react-js-pagination/tar": "^6.1.9",
+    "**/nth-check": "2.1.1"
   }
 }
