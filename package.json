@@ -49,8 +49,10 @@
     "eslint-plugin-react": "^7.37.1",
     "prettier": "^1.19.1"
   },
-  "resolutions": {
-    "react-js-pagination/tar": "^6.1.9",
-    "**/nth-check": "2.1.1"
+  "pnpm": {
+    "overrides": {
+      "react-js-pagination": "^3.0.3",
+      "nth-check": "2.1.1"
+    }
   }
 }
