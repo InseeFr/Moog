@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Use Node.js
         uses: actions/setup-node@v4
-      - run: pnpm run --frozen-lockfile
+      - run: pnpm install --frozen-lockfile
   build:
     runs-on: ubuntu-latest
     steps:
@@ -26,3 +26,4 @@ jobs:
         with:
           name: build
           path: build
+          
