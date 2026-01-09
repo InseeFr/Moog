@@ -39,8 +39,8 @@ const Form = ({ closeModal, uniteEnquete, ajouterISG }) => {
           <option disabled hidden value="placeholder">
             Choisir le signalement à ajouter
           </option>
-          <option value={statusIsgAutorises.VALPAP.type}>
-            {statusIsgAutorises.VALPAP.libelle}
+          <option value={statusIsgAutorises.RECUPAP.type}>
+            {statusIsgAutorises.RECUPAP.libelle}
           </option>
           <option value={statusIsgAutorises.PND.type}>
             {statusIsgAutorises.PND.libelle}

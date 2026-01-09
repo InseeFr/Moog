@@ -4,7 +4,7 @@ export const ASSISTANCE_ROLE = "assistancemoog_Capi3G";
 
 /* statuts infoSuiviGestion autorisés lors de l'import */
 export const reponseAttenduDansCSV = {
-  VALPAP: "VALPAP",
+  RECUPAP: "RECUPAP",
   PND: "PND",
   REFUS: "REFUS",
   DECHET: "DECHET",
@@ -20,7 +20,7 @@ export const boutonSupprimerCondition = {
 };
 /* status infoSuiviGestion autorises pour l'ajout manuel d'une infoSuiviGestion dans l'historique */
 export const statusIsgAutorises = {
-  VALPAP: { type: "VALPAP", libelle: "Papier reçu" },
+  RECUPAP: { type: "RECUPAP", libelle: "Papier reçu" },
   PND: { type: "PND", libelle: "PND" },
   HC: { type: "HC", libelle: "Hors champ" },
   REFUS: { type: "REFUS", libelle: "Refus" },
